@@ -40,7 +40,7 @@ export class MyLibComponent implements OnInit{
 
   @Input() testInput: any;
 
-  @Output('sentData')
+  @Output('sentDataOutput')
   enviaDados: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
