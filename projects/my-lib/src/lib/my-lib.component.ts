@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { LoginModel } from './login.model';
 
 @Component({
-  selector: 'lib-my-lib',
+  selector: 'ds2u-my-lib',
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, ReactiveFormsModule],
   template: `
@@ -31,6 +31,9 @@ import { LoginModel } from './login.model';
                 </div>
             </form>
         </mat-card-content>
+        <p>{{ checkFeature() }}</p>
+        <button (click)="changeFeature()">Alterar feature</button>
+
     </mat-card>
   `,
   styles: ``
@@ -39,6 +42,9 @@ export class MyLibComponent implements OnInit{
   loginForm!: FormGroup;
 
   @Input() testInput: any;
+  @Input() enableFeature: boolean = true;
+
+
 
   @Output('sentDataOutput')
   enviaDados: EventEmitter<any> = new EventEmitter<any>();
@@ -62,8 +68,16 @@ export class MyLibComponent implements OnInit{
     this.sentData()
   }
 
+  changeFeature(){
+    this.enableFeature = !this.enableFeature;  
+  }
+
   sentData(){
     this.enviaDados.emit(this.loginForm.value)
+  }
+
+  checkFeature(): string {
+    return this.enableFeature ? 'Feature is enabled' : 'Feature is disabled';
   }
 
 }

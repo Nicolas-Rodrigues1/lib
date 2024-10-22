@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MyLibComponent } from 'my-lib';
 
@@ -10,7 +10,10 @@ import { MyLibComponent } from 'my-lib';
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit{
+  @ViewChild(MyLibComponent) myLibComponent!: MyLibComponent;
+
   title = 'teste';
+
   login: any;
   
   public sendTest!: string;
@@ -23,4 +26,10 @@ export class AppComponent implements OnInit{
     this.login = dados
     console.log(this.login)
   }
+
+  //puxando função diretamente da lib
+  toggleFeatureInLib(): void {
+    this.myLibComponent.changeFeature();
+  }
+
 }
